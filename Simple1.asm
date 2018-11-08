@@ -3,27 +3,25 @@
 	code
 	org 0x0
 	
-rst	code	0x0000		    ; reset vector
 	goto	start
 	
-	; ******* Set up high-priority interrupt vector
-int_hi	code	0x0008		    ; high vector, no low vector
-	btfss	INTCON,TMR0IF	    ; check that this is timer0 interrupt
-	retfie	FAST		    ; if not then return
-	incf	LATD		    ; increment PORTD
-	bcf	INTCON,TMR0IF	    ; clear interrupt flag
-	retfie	FAST		    ; fast return from interrupt
+	; ******* Test code to output voltage of 4 V
 	
-	; ******* Main program
-main	code
+start				; Set PWM period by writing to the PR2 register
+	movlw	0x7C
+	movwf	PR2, ACCESS		; PR2 = 124
+				; Set PWM duty cycle 
+	movlw	0x64			; 0x64 = b'0110 0100'
+	movwf	CCPR4L, ACCESS		; Set PWM duty cycle DC<9:2>
+	bcf	DC4B0, CCP4CON, ACCESS	
+	bcf	DC4B1, CCP4CON, ACESS	; Set DC<1:0> = b'00'
 	
-start	clrf	TRISD		    ; Set PORTD as all outputs
-	clrf	LATD		    ; Clear PORTD outputs
-	movlw	b'10000111'	    ; Set timer0 to 16-bit, Fosc/4/256
-	movwf	T0CON		    ; = 62.5KHz clock rate, approx 1sec rollover
-	bsf	INTCON,TMR0IE	    ; Enable timer0 interrupt
-	bsf	INTCON,GIE	    ; Enable all interrupts
-	goto	$		    ; Sit in infinite loop
+	bcf	CCP4, TRISG, ACCESS	; Make CCP4 pin output
+	
+	bsf	T2CKPS1, T2CON, ACCESS	; TMR2 prescale value 16
+	bsf	TMR2ON, T2CON, ACCESS	; Enable Timer2
 
+	movlw	0x0F			; CCP4CON<3:0> = b'1111' 
+	iorwf	CCP4CON, F, ACCESS	; Configure CCP4 module for PWM operation
 	
 	end
