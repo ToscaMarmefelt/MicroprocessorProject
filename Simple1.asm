@@ -2,26 +2,42 @@
 	
 	code
 	org 0x0
+	goto	setup
 	
-	goto	start
+	; ******* Programme FLASH read Setup Code ***********************
+setup	bcf	EECON1, CFGS	; point to Flash program memory  
+	bsf	EECON1, EEPGD 	; access Flash program memory
+	;call	UART_Setup	; setup UART
+	;call	LCD_Setup	; setup LCD
+	call	ADC_Setup	; setup ADC
+	goto	measure_loop
 	
-	; ******* Test code to output voltage of 4 V
-	
-start				; Set PWM period by writing to the PR2 register
-	movlw	0x7C
-	movwf	PR2, ACCESS		; PR2 = 124
-				; Set PWM duty cycle 
-	movlw	0x64			; 0x64 = b'0110 0100'
-	movwf	CCPR4L, ACCESS		; Set PWM duty cycle DC<9:2>
-	bcf	DC4B0, CCP4CON, ACCESS	
-	bcf	DC4B1, CCP4CON, ACESS	; Set DC<1:0> = b'00'
-	
-	bcf	CCP4, TRISG, ACCESS	; Make CCP4 pin output
-	
-	bsf	T2CKPS1, T2CON, ACCESS	; TMR2 prescale value 16
-	bsf	TMR2ON, T2CON, ACCESS	; Enable Timer2
+measure_loop
+	call	ADC_Read
+	;movf	ADRESH,W
+	;call	LCD_Write_Hex
+	;movf	ADRESL,W
+	;call	LCD_Write_Hex
+	goto	measure_loop		; goto current line in code
 
-	movlw	0x0F			; CCP4CON<3:0> = b'1111' 
-	iorwf	CCP4CON, F, ACCESS	; Configure CCP4 module for PWM operation
+	
+ADC_Setup
+	bsf	    TRISA,RA0	    ; use pin A0(==AN0) for input
+	bsf	    ANCON0,ANSEL0   ; set A0 to analog
+	movlw   0x01	    ; select AN0 for measurement
+	movwf   ADCON0	    ; and turn ADC on
+	movlw   0x30	    ; Select 4.096V positive reference
+	movwf   ADCON1	    ; 0V for -ve reference and -ve input
+	movlw   0xF6	    ; Right justified output
+	movwf   ADCON2	    ; Fosc/64 clock and acquisition times
+	return
+
+ADC_Read
+	bsf	    ADCON0,GO	    ; Start conversion
+adc_loop
+	btfsc   ADCON0,GO	    ; check to see if finished
+	bra	    adc_loop
+	return
+	
 	
 	end
