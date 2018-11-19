@@ -1,4 +1,4 @@
-	#include p18f87k22.inc
+		#include p18f87k22.inc
 	
 acs0	udata_acs
 beforeH	    res 1   ; Reserve 8 bits for storage of D<11:8> from previous measurement
@@ -9,6 +9,7 @@ differenceH res	1   ; Temporary storage of difference between now and before vol
 differenceL res	1   ; Temporary storage of difference between now and before voltages
  
 dc	    res	1   ; Software PWM 8-bit duty cycle length
+delay_counter	res 1 ; Counter register for test delay
 	    
 	code
 	org 0x0
@@ -42,10 +43,23 @@ measure_loop
 	btfss	STATUS, N	
 	call	diff_positive	; If (difference) is positive, execute this line
 	
+	; Test that code is working
+	movlw	0x00
+	movwf	TRISC, ACCESS	; PORT C all outputs
+	movff	dc, PORTC	; Output duty cycle length on PORT C
+	call	test_delay	; Delay for x s so we can see duty cycle LEDs on PORT C
+	
 	; Stay in measurement loop
 	goto	measure_loop		; goto current line in code
 
 	
+	
+test_delay  ; For testing purposes only
+	movlw	0xFF
+	movwf	delay_counter
+loop	decfsz	delay_counter
+	bra	loop
+	return
 	
 diff_negative			; Any abs(difference) smaller than 100 mV will be considered negligable 
 	movlw	0x64		; 0x64 = 100 mV with our ADC settings
