@@ -12,7 +12,8 @@ period_u    res	    1	    ; Upper byte of PWM period
 counter_l   res	    1	    ; Lower byte of PWM counter
 counter_u   res	    1	    ; Upper byte of PWM counter
 dc	    res	    1	    ; Software PWM 8-bit duty cycle length
-
+	    
+ADC_counter res	1	    ; 8-bit counter to decide time between servo updates
 	    
 	code
 rst	org 0x0
@@ -74,13 +75,19 @@ measure_loop
 
 	btfss	STATUS, N
 	call	towards_LDR2	    ; If (ADC reading) > (upper limit): Move servo towards LDR2
-	btsc	STATUS, N
+	btfsc	STATUS, N
 	call	check_lower_limit   ; If (ADC reading) < (upper limit): Compare against lower limit
 
 ;	; Test that code is working
 ;	movlw	0x00
 ;	movwf	TRISC, ACCESS	    ; PORT C all outputs
 ;	movff	dc, PORTC	    ; Output duty cycle length on PORT C
+	
+	; Add delay to measurement loop (using reset_counter subroutine, called every 20 ms)
+loop	tstfsz	ADC_counter
+	bra	loop		    ; While ADC_counter != 0, wait in loop
+	movlw	0xA		    ; Reset ADC_counter to .10
+	movwf	ADC_counter	    
 	
 	goto	measure_loop	    ; Stay in measurement loop	
 	
@@ -98,13 +105,13 @@ check_lower_limit
 
 towards_LDR1
 	movlw	0x01
-	addwf	dc		    ; INCREMENT (?) duty cycle length by 1
+	subwf	dc		    ; DECREMENT (?) duty cycle length by 1
 	return
 	
 	
 towards_LDR2
 	movlw	0x01
-	subwf	dc		    ; DECREMENT (?) duty cycle length by 1
+	addwf	dc		    ; INCREMENT (?) duty cycle length by 1
 	return
 
 	
@@ -148,6 +155,7 @@ output_high
 reset_counter
 	clrf	counter_l
 	clrf	counter_u
+	decf	ADC_counter, F	    ; Decrement counter for motor position update	
 	return
 	
 	
@@ -164,12 +172,16 @@ ADC_Setup
 				; *** Set allowed span of voltages for LDR equilibrium ***
 	movlw	0x0A
 	movwf	upper_limit_u
-	movlw	0x28
+	movlw	0x8C
 	movwf	upper_limit_l	; Upper limit: 2600 mV = 0xA28
-	movlw	0x09
+	movlw	0x08
 	movwf	lower_limit_u
-	movlw	0x60
+	movlw	0xFC
 	movwf	lower_limit_l	; Lower limit: 2400 mV = 0x960
+	
+	movlw	0x0A
+	movwf	ADC_counter	; Initialise ADC_counter
+	
 	return
 
 ADC_Read
