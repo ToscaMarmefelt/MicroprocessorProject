@@ -104,15 +104,24 @@ check_lower_limit
 	return
 
 towards_LDR1
-	movlw	0x01
-	subwf	dc		    ; DECREMENT (?) duty cycle length by 1
-	return
-	
+	movff	dc, temp	    
+	decf	temp		    
+	movlw	0x3F		    ; Min duty cycle length is 1 ms = .63 counts = 0x3F counts 
+	subwf	temp, W		    ; (dc - 1) - (min duty cycle length)
+	btfss	STATUS, N	    
+	decf	dc		    ; If (dc) > (min duty cycle length), then decrement dc length by 1
+	return			    ; Else if (dc) = (min), then let duty cycle length remain unchanged
+
 	
 towards_LDR2
-	movlw	0x01
-	addwf	dc		    ; INCREMENT (?) duty cycle length by 1
-	return
+	movff	dc, temp
+	incf	temp
+	movlw	0x7D		    ; Max duty cycle length is 2 ms = .125 counts = 0x7D
+	subwf	temp, W		    ; (dc + 1) - (max duty cycle length)
+	btfsc	STATUS, N	     
+	incf	dc		    ; If (dc) < (max duty cycle length), then increment dc length by 1
+	return			    ; Else if (dc) = (max), then let duty cycle length remain unchanged
+
 
 	
 	; ******** PWM Settings ***************************************
