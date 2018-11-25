@@ -1,0 +1,784 @@
+%% bare_lab_report.tex
+%% V1.1 
+%% by Stuart Mangles
+%%
+%% This is a skeleton file demonstrating the use of imperial_lab_report.cls to 
+%% prepare lab reports for Imperial College Physics undergraduates
+%% it is based on the IEEE transactions journal style.
+%%
+%%
+%%
+%% based on bare_jrnl.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% see http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
+%% journal paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. The IEEE's font choices and paper sizes can   ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+
+\documentclass[journal]{Imperial_lab_report}
+%
+% If Imperial_lab_report.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[journal]{../sty/}
+
+
+
+
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/pkg/ifpdf
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+%\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of the IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off
+% such as if a citation ever needs to be enclosed in parenthesis.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 5.0 (2009-03-20) and later if using hyperref.sty.
+% The latest version can be obtained at:
+% http://www.ctan.org/pkg/cite
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+   \usepackage[pdftex]{graphicx}
+   \usepackage{dblfloatfix} 
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation
+% can be obtained at: 
+% http://www.ctan.org/pkg/graphicx
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found at:
+% http://www.ctan.org/pkg/epslatex
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics.
+%
+% Note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/amsmath
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/pkg/algorithms
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/pkg/algorithmicx
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/array
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\ifCLASSOPTIONcompsoc
+%  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+%\else
+%  \usepackage[caption=false,font=footnotesize]{subfig}
+%\fi
+% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
+% for subfigure.sty, the latter of which is no longer maintained and is
+% incompatible with some LaTeX packages including fixltx2e. However,
+% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
+% which will override IEEEtran.cls' handling of captions and this will result
+% in non-IEEE style figure/table captions. To prevent this problem, be sure
+% and invoke subfig.sty's "caption=false" package option (available since
+% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
+% handling of captions.
+% Note that the Computer Society format requires a larger sans serif font
+% than the serif footnote size font used in traditional IEEE formatting
+% and thus the need to invoke different subfig.sty package options depending
+% on whether compsoc mode has been enabled.
+%
+% The latest version and documentation of subfig.sty can be obtained at:
+% http://www.ctan.org/pkg/subfig
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure.
+% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
+% corrections already built into the system in which case a warning will
+% be issued if an attempt is made to load fixltx2e.sty as it is no longer
+% needed.
+% The latest version and documentation can be found at:
+% http://www.ctan.org/pkg/fixltx2e
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/stfloats
+% Do not use the stfloats baselinefloat ability as the IEEE does not allow
+% \baselineskip to stretch. Authors submitting work to the IEEE should note
+% that the IEEE rarely uses double column equations and that authors should try
+% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
+% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
+% such ways.
+% Do not attempt to use stfloats with fixltx2e as they are incompatible.
+% Instead, use Morten Hogholm'a dblfloatfix which combines the features
+% of both fixltx2e and stfloats:
+%
+% \usepackage{dblfloatfix}
+% The latest version can be found at:
+% http://www.ctan.org/pkg/dblfloatfix
+
+
+
+
+%\ifCLASSOPTIONcaptionsoff
+%  \usepackage[nomarkers]{endfloat}
+% \let\MYoriglatexcaption\caption
+% \renewcommand{\caption}[2][\relax]{\MYoriglatexcaption[#2]{#2}}
+%\fi
+% endfloat.sty was written by James Darrell McCauley, Jeff Goldberg and 
+% Axel Sommerfeldt. This package may be useful when used in conjunction with 
+% IEEEtran.cls'  captionsoff option. Some IEEE journals/societies require that
+% submissions have lists of figures/tables at the end of the paper and that
+% figures/tables without any captions are placed on a page by themselves at
+% the end of the document. If needed, the draftcls IEEEtran class option or
+% \CLASSINPUTbaselinestretch interface can be used to increase the line
+% spacing as well. Be sure and use the nomarkers option of endfloat to
+% prevent endfloat from "marking" where the figures would have been placed
+% in the text. The two hack lines of code above are a slight modification of
+% that suggested by in the endfloat docs (section 8.4.1) to ensure that
+% the full captions always appear in the list of figures/tables - even if
+% the user used the short optional argument of \caption[]{}.
+% IEEE papers do not typically make use of \caption[]'s optional argument,
+% so this should not be an issue. A similar trick can be used to disable
+% captions of packages such as subfig.sty that lack options to turn off
+% the subcaptions:
+% For subfig.sty:
+% \let\MYorigsubfloat\subfloat
+% \renewcommand{\subfloat}[2][\relax]{\MYorigsubfloat[]{#2}}
+% However, the above trick will not work if both optional arguments of
+% the \subfloat command are used. Furthermore, there needs to be a
+% description of each subfigure *somewhere* and endfloat does not add
+% subfigure captions to its list of figures. Thus, the best approach is to
+% avoid the use of subfigure captions (many IEEE journals avoid them anyway)
+% and instead reference/explain all the subfigures within the main caption.
+% The latest version of endfloat.sty and its documentation can obtained at:
+% http://www.ctan.org/pkg/endfloat
+%
+% The IEEEtran \ifCLASSOPTIONcaptionsoff conditional can also be used
+% later in the document, say, to conditionally put the References on a 
+% page by themselves.
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/url
+% Basically, \url{my_url_here}.
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title{G1h: Microprocessor Project Report Title}
+
+
+\author{Tosca Cederberg Marmefelt\\
+	CID: 01204044\\
+\today}% <-this % stops a space
+
+
+
+
+% The paper headers
+\markboth{Tosca Cederberg Marmefelt}%
+{Shell \MakeLowercase{\textit{et al.}}:}
+% The only time the second header will appear is for the odd numbered pages
+% after the title page when using the twoside option.
+% 
+% *** Note that you probably will NOT want to include the author's ***
+% *** name in the headers of peer review papers.                   ***
+% You can use \ifCLASSOPTIONpeerreview for conditional compilation here if
+% you desire.
+
+
+
+
+% If you want to put a publisher's ID mark on the page you can do it like
+% this:
+%\IEEEpubid{0000--0000/00\$00.00~\copyright~2015 IEEE}
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark.
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+
+% make the title area
+\maketitle
+
+% As a general rule, do not put math, special symbols or citations
+% in the abstract or keywords.
+\begin{abstract}
+I am going to try and write a slightly longer abstract than the one provided in the template to see if the figure will move. Please just move
+\end{abstract}
+
+
+\section{Introduction}
+
+\IEEEPARstart{T}{he} phenomenon of heliotropism, often better known as sun tracking, referrs to the ability of certain plant specicies to track the position of the sun in the sky and orient themselves accordingly. By positioning their leaves perpendicular to the incident sun rays throughout the day, the plants are able to maximise the photosynthesis they carry out. In addition to tracking the sun during the day, it has been shown that for example the (heliotropic) sunflower then repositions its leaves to face East as the sun sets in the evening \cite{sunflower}. The aim of this project was to imitate this remarcable behaviour in order to maximise the amount of sunlight incident on a small solar panel throughout the day by programming it to orient itself in the direction of the incident light. This was done using a PIC18 microcontroller, two pairs of light dependent resistors (LDRs), and two servo motors. 
+
+
+\section{High Level Design}
+The servo motors used to put the solar panel in position are run using a Pulse Width Modulator (PWM) signal, as illustrated in Figure \ref{duty cycle}. Requiring a period of $20$ ms, the length of the duty cycle then specifies the angle at which the motor is positioned. A duty cycle of length $1$ ms corresponds to an angle of $-90^{o}$, and $2$ ms to $90^{o}$. Allowing the duty cycle length to vary between $1$ and $2$ ms will thus enable the motor to span the entire $180^{o}$ range \cite{servo}.
+\begin{figure}[!b]
+	\centering
+	\includegraphics[width=\linewidth]{duty_cycle.pdf}
+	\caption{A simple diagram of the Pulse Width Modulator signal driving a servo motor. The length of the duty cycle determines the angle at which the servo is positioned at. The digital servo used for this project required a period of $20$ ms and a duty cycle ranging from $1$ - $2$ ms, corresponding to an angle of $-90$ - $90^{o}$. }
+	\label{duty cycle}
+\end{figure}
+
+The high level hardware design is presented in Figure \ref{block diagram}. The two pairs of LDRs are set up to determine the horizontal and vertical angular position of the solar panel. Each tilted at a slight angle away from the panel to avoid being placed in the same plane, the difference in incident light intensity on the two LDRs within a pair is then fed via an electric circuit into the PIC18. The PIC18 then converts the analog inputs to motor instructions which are outputed to the two servo motors in the form of two PWM signals. 
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=\linewidth]{hardware_block_diagram.pdf}
+	\caption{Block diagram presenting the high level hardware design of the product. The horizontal and vertical pairs of LDRs detect the direction of the light source incident on the solar panel. Based on the analog inputs of these, the two servo motors controlling the positioning of the solar panel are moved. }
+	\label{block diagram}
+\end{figure}
+
+For a complete breakdown of the software requirements, see the top-down modular diagram in Figure \ref{top-down}. As is shown in said diagram, the horizontal/vertical symmetry of the setup made it a strightforward task to expand the program to include both dimensions once the code had been written to enable rotation about one axis. 
+
+\begin{figure*}[!t]
+	\centering
+	\includegraphics[width=\linewidth]{top-down_modular_diagram.pdf}
+	\caption{Top-down modular diagram explaining the high level requirements of the program written to allow the solar panel to trace the direction of the incident light. In the diagram it becomes clear that the horizontal/vertical symmetry of the problem will allow for a large portion of the code to be reused. }
+	\label{top-down}
+\end{figure*}
+
+\section{Software and Hardware Design}
+
+\subsection{Software Design}
+In the initial stages of the project, it was believed that the easiest way of producing the PWM signal required to drive the servo motors into position was to make use of one of the Capture/Compare/PWM (CCP) modules provided as a special feature of the PIC18. The period of the build-in PWM signal when implementing the (here arbitrarily chosen) CCP4 module is given by
+\begin{equation}
+\label{pwm period}
+PWM period = [PR2 + 1] \times 4 \times TOSC \times [T2CKPS] , 
+\end{equation}
+where $PR2$ is the 8-bit period register of Timer2, $TOSC$ is the oscillating frequency of the internal clock, set by default to $64$ MHz, and $T2CKPS$ is the Timer2 clock prescale factor. The Timer2 prescale factor can take values of either $1$, $4$ or $16$ \cite{pic datasheet}. This then gives a maximum period of 
+\begin{equation}
+period_{max} = 256 \times 4 \times \frac{1}{64 \times 10^{6}} \times 16 = 0.256 ms ,
+\end{equation}
+which is approximately a factor $100$ smaller than the period required to drive the servo motors. From Equation \ref{pwm period}, it is clear that the two ways of increading the maximum period obtained is to either allow the timer period to be specified using a greater number of bits, or alternatively decrease the internal clock frequency. 
+\\
+\\The CCP4 module can be based of either Timer1/Timer2, Timer3/Timer4 or Timer3/Timer6, neither of which provide the option of specifying the associated counter with more than 8 bits \cite{pic datasheet}. 
+\\
+\\The PIC18 offers oscillator configurations ranging from $64$ MHz down to as low as $32$ kHz \cite{pic datasheet}. Reducing the operating oscillating frequency of the PIC would not only by extension enable a longer PWM period as discussed above, but would lead to the entire PIC slowing down it's operating speed. While this would mean the overall power consumption of the system was reduced, the prospect of elliminating the product's ability to detect and quickly respond to short term changes in light intensity led to this option being discarded. 
+\\
+\\While it would have been possible to overcome these obstacles by cascading two or more timers to obtain the required period, creating a software PWM was declared a more efficient approach. Hence it was decided that the PWM was to be generated based of the Timer0 8-bit counter, implementing a 16-bit counter located in data memory. Setting Timer0 to run off the internal clock of $64$ MHz and having a prescaler value of $1:1$, the Timer0 interrupt being called as the counter rolls over from $0xFF=.255$ to $0x00=.0$ will thus have a frequency $f_{interrupt}$ of 
+\begin{equation}
+f_{interrupt} = \frac{16 MHz}{256} = 62.5 kHz.
+\end{equation}
+The software PWM counter was implemented to be incremented every time the Timer0 interrupt was being called. Hence, each count of the PWM counter has a duration of
+\begin{equation}
+\frac{1}{62.5 kHz} = 16 \mu s.
+\end{equation}
+In order to get the required period of $20$ ms, the number of counts corresponding to one period is thus
+\begin{equation}
+counts_{period} = \frac{20 ms}{16 \mu s} = 1250.
+\end{equation}
+Similarly, the resolution of the duty cycle, defined to be given by a pulse length between $1$ and $2$ ms, can then be calculated as
+\begin{equation}
+counts_{duty cycle} = \frac{1 ms}{16 \mu s} = 62.5 \approx 63
+\end{equation}
+specified to the nearest integer. With each servo motor having the ability to rotate over a $180^{o}$ range, this gives the smallest representable angle $\theta_{min}$ to be
+\begin{equation}
+\label{min angle}
+\theta_{min} \approx \frac{180^{o}}{63} = 2.9^{o}.
+\end{equation}
+As part of the initial scope of the project, the product was intended for outdoor use, tracing the Sun's relative movement by repositioning itself using the mechanisms outlines in this report every $30$ min. In the span of $30$ min, the Sun would have moved approximately $\frac{360^{o}}{24 \times 2} = 7.5^{o}$. Hence the resolution of $2.9^{o}$ per step of the motor was declared sufficient. 
+\\
+\\In practise, the PWM signals for the two servo motors were implemented as illustrated in Figure \ref{pwm}, where going from START to END corresponds to entering and exiting the Timer0 interrupt. Sice the horizontal and vertical rotational motions were treated independently, separate PWM signals were required, and hence also separate duty cycle lengths. The two signals were outputed on separate pins on the same port, here pins $0$ and $1$ on $PORTD$ respectively. 
+
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=\linewidth]{flowchart_pwm.pdf}
+	\caption{Flowchart describing the setup of the software PWM used to run the two servo motors determining the horizontal and vertical angular position respectively. The corresponding duty cycle lengths, each of a value ranging from $63$ to $125$ corresponding to $\pm 90^{o}$, determine when to pull the output pin high or low. }
+	\label{pwm}
+\end{figure}
+
+In order to identify which out of two LRDs within a pair (horizontal or vertical respectively) received the most light, the corresponding instrumental amplifier signal was fed into the PIC18 internal 12-bit Analog-to-Digital Converter (ADC). By enabling one of the analog inputs at a time, the same routine could be used to determine whether the detected signal was within the voltage span indicating equal intensities ($2.500 \pm 0.100$ V), or if the corresponding duty cycle length had to be shortened or elongated (i.e. $\mp 2.9^{o}$) in order to orient the solar panel in the direction of the maximum light intensity. 
+The process flow is illustrated in Figure \ref{adc}. 
+
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=\linewidth]{flowchart_adc.pdf}
+	\caption{Flowchart describing the process flow of converting a analogue input signal into a change in duty cycle length, and as a consequence rotating the panel towards the direction of the LDR receiving the highest light intencity. }
+	\label{adc}
+\end{figure}
+
+In the limit where the servo motor was already pointing at $\pm 90^{o}$, but the difference in light intensity still called for additional increase or decrease in duty cycle length, the value would be capped at $1$ and $2$ ms respectively. This reduced the delayed response when the light source was moved in the another direction. 
+
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=3.5cm]{flowchart_main.pdf}
+	\caption{Overall structure of the main program used to orient the solar panel. The process of updating the respective duty cycle lengths according to the measured input is outlined in Figure \ref{adc}.}
+	\label{main}
+\end{figure}
+
+The main program was structured according to the schematic in Figure \ref{main}. Implementing a delay rountine based off the PWM period, the duty cycle is updated every $0.2$ s, or once every $10$ preiods. See source code for further details \cite{github}. 
+
+\subsection{Hardware Design}
+Implementing the two pairs of LDRs (horizontal and vertical respectively) into a Wheatstone bridge allowed for the indirect detection of difference in resistance within the pair by measuring the voltage. When fed into an instrumental amplifier as illustrated in Figure \ref{schematic}, the \textbf{diversion} from $2.5$ V of the voltage at the point between the two LDRs relative to ground will be negative (positive) if more light is incident on $LDR1$ ($LDR2$). When the light incident on the two detectors is equal, the difference between the positive and negative inputs of the instrumental amplifier is $0$ V. By shifting the reference voltages of the amplifier to $0$ - $5$ V instead of the conventional $-2.5$ - $2.5$ V allowed for the elimination of an additional power source originally needed to provide the negative voltage reference, hence keeping the power consumption of the circuit to a minimum. 
+\\
+\\The output of the instrumental amplifier was then connected to a low-pass filter. 
+
+\begin{figure*}[!t]
+	\centering
+	\includegraphics[width=\linewidth]{schematic.pdf}
+	\caption{Detailed hardware schematic of the product. The two components labeled SV1/2 in the upper right corner are the two servo motors responsible for moving the system into position. The PWM signals driving the motors are outputted via pins $0$ and $1$ respectively on $PORTD$. The relative light intensity incident on the LDRs $1$ and $2$ for the horizontal (pan) and vertical (tilt) circuits are fed through an instrumental amplifier AD623, via a lowpass filter and finally inputted as an analogue signal to pins $0$ and $1$ respectively on $PORTA$.}
+	\label{schematic}
+\end{figure*}
+
+The cutoff-frequency $f_{c}$ of a low-pass filter is given by
+\begin{equation}
+	f_{c} = \frac{1}{2 \pi RC} = \frac{1}{2 \pi \tau} ,
+\end{equation}
+where $R$ is the resistance, $C$ is the capacitance and $\tau$ is the time constant of the filter. By letting $R=56$ k$\Omega$ and $C=10 \mu$F, the cutoff-frequency is $f_{c} = 0.28 $ Hz. This allows for high-frequency noise of about $100$ Hz caused by the \textbf{AC in the ceiling lamp} to be elliminated from the analog input to the ADC. Furthermore, this setup gives a time constant of $\tau = RC = 0.56$ s, i.e. disregarding any differences in light intencity incident on an LDR pair for a duration of less than $0.56$ s. 
+%In order to ensure that the ripples on the analog signal caused by \textbf{inconsistencies in the room light were eliminated}, the components were chosen to be $R=56$ k$\Omega$ and $C=10 \mu$F, giving a time constant of $\tau = RC = 0.56$ s. This allowed for the signal to no longer include the noice caused by the light emitted
+
+\section{Results and Performance}
+\begin{itemize}
+	\item \textbf{Span of angles it can reach?} Address obvious limitation of the servo only being able to rotate $\pm 90^{o}$ about each axis
+	\item \textbf{How quickly it can move from one (exteme) side to another?}
+	\item Response time: Time it takes form reading in ADC signal to making the motor move
+	\item Ability to disregard/filter out short intensity changes (perform test to see shortest period of light pulse that does not result in movement of the motor?). \textbf{Comment on this compared to time constant $\tau$ of low-pass filter}
+	\item Compare power generated by solar cell to the power required to run program/keep servo in position. \textbf{How do we quote this?}
+\end{itemize}
+
+\subsection{Net Energy Consumption}
+
+\section{Updates, Modifications and Improvements}
+\subsection{Improvements of Existing Features}
+\begin{itemize}
+%	\item 
+	\item Instead of moving one "step" at a time, depending on the magnitude of the output from the IntAmp, we may choose to increment/decrement the duty cycle by multiple steps at a time. 
+	\item If we notice that we move back and forth one step each time, make system recognise that and remain still instead? \textbf{How to phrase this nicely?}
+\end{itemize}
+
+\subsection{Proposed Additional Features}
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\section{Conclusions}
+Summary of the most important things. 
+
+\section{Product Specifications}
+Resolution of servo movement
+Smallest intensity of light required
+Smallest difference between LDRs we can detect
+Response time/speed of movement
+Time to move from one extreme to another
+
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.3}
+\caption{Product Specifications}
+\label{table_example}
+\centering
+\begin{tabular}{|l||l|}
+\hline
+\textbf{Property} &\textbf{Value}\\
+\hline \hline
+Speed of movement & $6.90 \pm 0.49$ degrees/s\\
+\hline
+Minimum duration of light intensity difference & $0.59 \pm 0.XX$ s\\
+\hline
+Power required to run system & $0.88 \pm 0.02 $ W \\
+\hline
+Maximum power produced & $0.3$ W\\ %$0.58 \pm 0.05$ mW (indoors with torch) 
+\hline 
+Program memory required & $628$ bytes \\
+\hline
+Data memory required & $12$ bytes\\
+\hline
+\end{tabular}
+\end{table}
+
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure}
+
+% Note that the IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command,
+% and the \label for the overall figure must come after \caption.
+% \hfil is used as a separator to get equal spacing.
+% Watch out that the combined width of all the subfigures on a 
+% line do not exceed the text width or a line break will occur.
+%
+%\begin{figure*}[!t]
+%\centering
+%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
+%\label{fig_second_case}}
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat[]), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+% Be aware that for subfig.sty to generate the (a), (b), etc., subfigure
+% labels, the optional argument to \subfloat must be present. If a
+% subcaption is not desired, just leave its contents blank,
+% e.g., \subfloat[].
+
+
+% An example of a floating table. Note that, for IEEE style tables, the
+% \caption command should come BEFORE the table and, given that table
+% captions serve much like titles, are usually capitalized except for words
+% such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to
+% and up, which are usually not capitalized unless they are the first or
+% last word of the caption. Table text will default to \footnotesize as
+% the IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that the IEEE does not put floats in the very first column
+% - or typically anywhere on the first page for that matter. Also,
+% in-text middle ("here") positioning is typically not used, but it
+% is allowed and encouraged for Computer Society conferences (but
+% not Computer Society journals). Most IEEE journals/conferences use
+% top floats exclusively. 
+% Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the
+% \fnbelowfloat command of the stfloats package.
+
+
+
+
+
+
+
+% if have a single appendix:
+%\appendix[Proof of the Zonklar Equations]
+% or
+%\appendix  % for no appendix heading
+% do not use \section anymore after \appendix, only \section*
+% is possibly needed
+
+% use appendices with more than one appendix
+% then use \section to start each appendix
+% you must declare a \section before using any
+% \subsection or using \label (\appendices by itself
+% starts a section numbered zero.)
+%
+
+
+%\appendices
+%\section{Proof of  Einstein's Famous  Equation}
+%The famous equation $$ E = mc^2$$
+%can be derived.
+%% you can choose not to have a title for an appendix
+%% if you want by leaving the argument blank
+%\section{}
+%[Appendix two text goes here.]
+%
+
+% use section* for acknowledgment
+\section*{Acknowledgment}
+
+\textbf{Thank demonstrators? }
+
+
+% Can use something like this to put references on a page
+% by themselves when using endfloat and the captionsoff option.
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://mirror.ctan.org/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+\bibliographystyle{ieeetran} 
+% use the following line to create a bibligraphy based on a .bib bibtex file (change to your filename)
+%\bibliography{filename}
+
+
+\begin{thebibliography}{5}
+\bibitem{sunflower} Indiana University, Department of Biology. \textit{Sun-Tracking: Sunflower Plants} [Internet]. Bloomington (IN): Roger P. Hangarter; 2000. [Cited 25 November 2018] Available from: http://plantsinmotion.bio.indiana.edu/plantmotion/movements/tropism/trop\\isms.html 
+
+\bibitem{servo} Components 101 [Internet]. Datasheet: \textit{SG90 9g Micro Servo}; 2017. [Cited 25 November 2018]
+Available from: https://components101.com/sites/default/files/component\_datasheet/SG90\\\%20Servo\%20Motor\%20Datasheet.pdf
+	
+\bibitem{pic datasheet} Microship Technology Inc. [Internet]. Datasheet: \textit{PIC18F87K22 Family Data Sheet}; 2009-2018. [Cited 25 November 2018]
+Available from: http://ww1.microchip.com/downloads/en/DeviceDoc/PIC18F87K22-Family-Data-Sheet-30009960E.pdf 
+
+\bibitem{github} Cederberg Marmefelt, Tosca. GitHub repository: \textit{MicroprocessorProjectG1h}; (2018). [Cited on 26 November 2018] Available from: https://github.com/ToscaMarmefelt/MicroprocessorProjectG1h
+
+\bibitem{intamp}Analog Devices [Internet]. Datasheet \textit{AD623: Single and Dual-Supply, Rail-to-Rail, Low Cost Instrumentation Amplifier}; 2018. [Cited 25 November 2018] Available from: https://www.analog.com/media/en/technical-documentation/data-sheets/ad623.pdf
+
+\end{thebibliography}
+
+
+% that's all folks
+\end{document}
+
+
